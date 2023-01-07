@@ -5,7 +5,7 @@ const Output = ({ url: { short_url } }) => {
     <section className='my-1 bg-[#24252D] min-h-max flex items-center justify-center py-5'>
       <div className='border-[3.5px] border-gray-700 border-dashed p-4 flex justify-between items-center'>
         <div className="w-[20rem] sm:w-[27rem] my-1">
-          <input type="text" value={short_url} name="url" className="w-full bg-[ghostwhite] rounded border-none text-base outline-none text-gray-700 py-1 px-3 leading-8" />
+          <input type="text" defaultValue={short_url} name="url" className="w-full bg-[ghostwhite] rounded border-none text-base outline-none text-gray-700 py-1 px-3 leading-8" />
         </div>
         <div className='bg-green-500 rounded-full p-1 cursor-pointer mx-1' onClick={() => navigator.clipboard.writeText(short_url)}>
           <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
