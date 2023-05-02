@@ -1,19 +1,29 @@
-import React from 'react'
+import React, { useRef } from 'react'
 
 const Output = ({ url: { short_url } }) => {
+  const ref = useRef(null);
   return (
-    <section className='my-1 bg-[#24252D] min-h-max flex items-center justify-center py-5'>
-      <div className='border-[3.5px] border-gray-700 border-dashed p-4 flex justify-between items-center'>
-        <div className="w-[20rem] sm:w-[27rem] my-1">
+    <section className='my-1 bg-[#24252D] h-auto py-5 text-center'>
+      <div className='border-[3.5px] border-gray-700 border-dashed p-4 flex items-center justify-center max-w-[30rem] mx-auto'>
+        <div className="my-1 flex-[1_1_20rem]">
           <input type="text" defaultValue={short_url} name="url" className="w-full bg-[ghostwhite] rounded border-none text-base outline-none text-gray-700 py-1 px-3 leading-8" />
         </div>
-        <div className='bg-green-500 rounded-full p-1 cursor-pointer mx-1' onClick={() => navigator.clipboard.writeText(short_url)}>
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path fillRule="evenodd" clipRule="evenodd" d="M24.7397 9.91727V19.9465C24.7397 21.0543 23.8416 21.9524 22.7338 21.9524C22.1799 21.9524 21.7309 21.5033 21.7309 20.9494V14.27C21.7315 13.9643 21.6085 13.6713 21.3899 13.4576L17.8997 10.0075C17.2774 9.37513 16.4301 9.01459 15.5429 9.00461H11.7017C11.1478 9.00461 10.6987 8.55559 10.6987 8.00169V6.87841C10.6987 6.11327 11.0034 5.37962 11.5454 4.83953C12.0873 4.29943 12.822 3.99735 13.5872 4.00002H18.9127C19.6658 4.00761 20.3859 4.31006 20.9186 4.84247L23.9273 7.85125C24.4625 8.40421 24.7549 9.14788 24.7397 9.91727ZM19.8855 13.929L16.8768 10.9202C16.3453 10.386 15.6244 10.0832 14.8709 10.0777H9.54539C7.95407 10.0833 6.66698 11.3748 6.66699 12.9662V25.1116C6.66699 26.7068 7.96018 28 9.55541 28H17.8697C19.4531 27.9835 20.7281 26.6951 20.728 25.1116V15.9348C20.7358 15.1776 20.4479 14.4472 19.9257 13.8989L19.8855 13.929Z" fill="#ffffff"></path>
+        <div className='bg-green-500 rounded-full p-1 cursor-pointer mx-2'>
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" onClick={(e) => {
+            navigator.clipboard.writeText(short_url);
+            ref.current.style.cssText += 'display: block; text-decoration: underline; color: #ffffff; margin-top: 9px; font-size: 1.15rem';
+            setInterval(() => {
+              ref.current.style = null;
+            }, 5000);
+          }}>
+            <path fillRule="evenodd" clipRule="evenodd" d="M24.7397 9.91727V19.9465C24.7397 21.0543 23.8416 21.9524 22.7338 21.9524C22.1799 21.9524 21.7309 21.5033 21.7309 20.9494V14.27C21.7315 13.9643 21.6085 13.6713 21.3899 13.4576L17.8997 10.0075C17.2774 9.37513 16.4301 9.01459 15.5429 9.00461H11.7017C11.1478 9.00461 10.6987 8.55559 10.6987 8.00169V6.87841C10.6987 6.11327 11.0034 5.37962 11.5454 4.83953C12.0873 4.29943 12.822 3.99735 13.5872 4.00002H18.9127C19.6658 4.00761 20.3859 4.31006 20.9186 4.84247L23.9273 7.85125C24.4625 8.40421 24.7549 9.14788 24.7397 9.91727ZM19.8855 13.929L16.8768 10.9202C16.3453 10.386 15.6244 10.0832 14.8709 10.0777H9.54539C7.95407 10.0833 6.66698 11.3748 6.66699 12.9662V25.1116C6.66699 26.7068 7.96018 28 9.55541 28H17.8697C19.4531 27.9835 20.7281 26.6951 20.728 25.1116V15.9348C20.7358 15.1776 20.4479 14.4472 19.9257 13.8989L19.8855 13.929Z" fill='#000000'></path>
           </svg>
         </div>
       </div>
-    </section>
+      <template ref={ref}>
+        <p>URL copied to clipboard!</p>
+      </template>
+    </section >
   )
 }
 

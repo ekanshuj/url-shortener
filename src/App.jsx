@@ -4,7 +4,7 @@ import { Header, Component } from './components';
 const App = () => {
   return (
     <main>
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-[75rem] mx-auto">
         <Header />
         <Component />
       </div>
